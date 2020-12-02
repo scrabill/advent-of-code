@@ -42,3 +42,27 @@ function partOne(database) {
 }
 
 console.log(partOne(allText))
+
+function partTwo(database) {
+    let validPasswords = 0
+
+    database.forEach(line => {
+
+        let [policy, password] = line.split(": ")
+ 
+        let key = policy.charAt(policy.length - 1)
+        let [lowerNum, upperNum] = policy.split("-", 2)
+        upperNum = upperNum.split(" ",1)
+
+        if (password.charAt(lowerNum - 1) == key && password.charAt(upperNum - 1) != key) {
+            validPasswords++
+        } else if (password.charAt(upperNum - 1) == key && password.charAt(lowerNum - 1) != key) {
+            validPasswords++
+        }
+ 
+     });
+ 
+     return validPasswords
+ }
+
+console.log(partTwo(allText))
